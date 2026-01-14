@@ -138,12 +138,13 @@ encrypted_text_file = "encrypted_text.txt"
 decrypted_text_file = "decrypted_text.txt"
 
 
-# Take shift1 value from user
-shift1 = int(input("Enter value for shift1: "))
-
-# Take shift2 value from user
-shift2 = int(input("Enter value for shift2: "))
-
+# Take shift1 and shift2 values from user with validation
+try:
+    shift1 = int(input("Enter value for shift1: "))
+    shift2 = int(input("Enter value for shift2: "))
+except ValueError:
+    print("Invalid input. Please enter integers.")
+    exit()
 try:
     # Read content from raw_text.txt file
     with open(raw_text_file, "r") as file:
