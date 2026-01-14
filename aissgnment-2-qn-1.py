@@ -98,6 +98,36 @@ def encrypt_text(text, shift1, shift2):
 
     return "".join(encrypted_chars)
 
+
+def decrypt_text(text, shift1, shift2):
+    """decrypts text using the decryption algorithm"""
+    # list is used to append the decrypted characters, later converted to a string
+    decrypted_chars = []
+
+    for ch in text:
+        if "a" <= ch <= "m":
+            shift_value = -(shift1 * shift2)
+            decrypted_chars.append(shift_char_in_range(ch, shift_value, "a", "m"))
+        elif "n" <= ch <= "z":
+            shift_value = shift1 + shift2
+            decrypted_chars.append(shift_char_in_range(ch, shift_value, "n", "z"))
+        elif "A" <= ch <= "M":
+            shift_value = shift1
+            decrypted_chars.append(shift_char_in_range(ch, shift_value, "A", "M"))
+        elif "N" <= ch <= "Z":
+            shift_value = -(shift2**2)
+            decrypted_chars.append(shift_char_in_range(ch, shift_value, "N", "Z"))
+        else:
+            decrypted_chars.append(ch)
+
+    return "".join(decrypted_chars)
+
+
+def verify_decryption(original_text, decrypted_text):
+    """returns true if the original text and decrypted text are same(meaning decryption works)"""
+    return original_text == decrypted_text
+
+#################
 # Main Program
 
 # file name to read content from
@@ -126,6 +156,18 @@ try:
     with open(encrypted_text_file, "w") as file:
         file.write(encrypted)
 
+    # Decrypt the encrypted data
+    decrypted_data = decrypt_text(encrypted, shift1, shift2)
+
+    # Write decrypted data into decrypted_text.txt file
+    with open(decrypted_text_file, "w") as file:
+        file.write(decrypted_data)
+
+    # Check if decrypted data and raw data are same
+    if verify_decryption(raw_text, decrypted_data):
+        print("Decryption was successfull!")
+    else:
+        print("Decryption failed!")
 
 except Exception as e:
     print("Something went wrong.", e)
