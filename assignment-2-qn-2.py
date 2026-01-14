@@ -294,6 +294,11 @@ try:
     # Get max range of temperatures
     max_range_stations = compute_largest_temp_range(data)
 
+    # Write to average_temp.txt file
+    with open("average_temp.txt", "w") as file:
+        for season, temperature in avg_season_temperature.items():
+            file.write(f"{season}: {temperature:.2f}°C\n")
+
     # Write to largest_temp_range_station.txt file
     with open("largest_temp_range_station.txt", "w") as file:
         for station in max_range_stations:
