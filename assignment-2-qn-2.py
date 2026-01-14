@@ -167,6 +167,148 @@ def compute_avg_season_temperature(all_data):
 
     return seasons
 
+def compute_largest_temp_range(all_data):
+    """compute the station with largest temperature range"""
+
+    max_range = 0
+    max_range_stations = []
+    ranges_station = []
+
+    # Loop through each entry
+    for station in all_data:
+        temperatures = []
+
+        # go through all months of a year
+        for month in YEAR_MONTHS:
+            if month in station:
+                # get the temperature for the month
+                tempe_value = station[month]
+                if is_valid_temperature(tempe_value):
+                    temperatures.append(float(tempe_value))
+
+        if temperatures:
+            # compute the max gap between largest and lowest temperature
+            max_temp = max(temperatures)
+            min_temp = min(temperatures)
+            tempe_range = max_temp - min_temp
+            ranges_station.append(
+                (station["STATION_NAME"], tempe_range, max_temp, min_temp)
+            )
+
+            # Set the max range if found
+            if tempe_range > max_range:
+                max_range = tempe_range
+
+    # Filter the stations with max range
+    for station in ranges_station:
+        if station[1] == max_range:
+            max_range_stations.append(station)
+
+    return max_range_stations
+
+
+def compute_stable_temp_range(all_data):
+    """compute the station with largest and lowest standard deviation in temperature range"""
+
+    max_deviation = 0
+    min_deviation = 0
+    is_initial = True  # for initial deviation comparision
+
+    # store stations with highest deviation (most variable)
+    high_deviation_stations = []
+
+    # store stations with lowest deviation (most stable)
+    low_deviation_stations = []
+
+    # each station with their individual deviation value
+    ranges_station = []
+
+    # Loop through each entry
+    for station in all_data:
+        temperatures = []
+        tempe_sum = 0
+
+        # go through all months of a year
+        for month in YEAR_MONTHS:
+            if month in station:
+                # get the temperature for the month
+                tempe_value = station[month]
+                if is_valid_temperature(tempe_value):
+                    val = float(tempe_value)
+                    # append to temperatures list
+                    temperatures.append(val)
+                    # add to sum
+                    tempe_sum += val
+
+        if temperatures:
+            # total number of temperatures
+            total_size = len(temperatures)
+            # Mean of all temperatures in list
+            mean_val = tempe_sum / total_size
+
+            total_squared_diff = 0
+
+            # sum of  (Xi - Mean) ^ 2, where i = index
+            for t in temperatures:
+                total_squared_diff += (t - mean_val) ** 2
+
+            # compute the standard deviation
+            deviation = math.sqrt((1 / total_size) * total_squared_diff)
+
+            ranges_station.append((station["STATION_NAME"], deviation))
+
+            # Set the max deviation if needed
+            if deviation > max_deviation:
+                max_deviation = deviation
+
+            # set the min deviation value if needed
+            if is_initial:
+                min_deviation = deviation
+            else:
+                if deviation < min_deviation:
+                    min_deviation = deviation
+
+    # Filter the stations with highest deviation (less stable)
+    for station in ranges_station:
+        if station[1] == max_deviation:
+            high_deviation_stations.append(station)
+
+    # Filter the stations with lowest deviation (most stable)
+    for station in ranges_station:
+        if station[1] == min_deviation:
+            low_deviation_stations.append(station)
+
+    return high_deviation_stations, low_deviation_stations
 
 
 ### Main Program
+
+
+try:
+    # read all temperature data
+    data = read_temperature_files()
+
+    # Get the average seasonal temperature values
+    avg_season_temperature = compute_avg_season_temperature(data)
+
+    # Get max range of temperatures
+    max_range_stations = compute_largest_temp_range(data)
+
+    # Write to largest_temp_range_station.txt file
+    with open("largest_temp_range_station.txt", "w") as file:
+        for station in max_range_stations:
+            file.write(f"Station {station[0]}: Range {station[1]:.2f}°C (Max: {station[2]:.2f}°C, Min: {station[3]:.2f}°C)\n")
+
+
+    # Get stable and variable stations
+    low_stable_stations, most_stable_stations = compute_stable_temp_range(data)
+    with open("temperature_stability_stations.txt", "w") as file:
+        # for stable
+        for station in most_stable_stations:
+            file.write(f"Most Stable: Station {station[0]}: StdDev {station[1]:.2f}°C\n")
+        # for variable stations
+        for station in low_stable_stations:
+            file.write(f"Most Variable: Station {station[0]}: StdDev {station[1]:.2f}°C\n")
+
+except Exception as e:
+    print("Something went wrong.", e)
