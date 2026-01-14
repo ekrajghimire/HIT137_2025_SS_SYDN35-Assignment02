@@ -37,7 +37,7 @@ When run, your program should automatically:<br>
   3. Decrypt the encrypted file<br>
   4. Verify the decryption matches the original<br>
 
-  Solution:
+Output Screenshot:
   <img src="./assests/solution-qn-1.png"/>
 
 ---
@@ -60,7 +60,7 @@ Create a program that analyses temperature data collected from multiple weather 
     - "Most Variable: Station DEF: StdDev 12.8°C"  
   - If multiple stations tie, list all of them
 <br/>
-  Solution:
+Output Screenshot:
   <img src="./assests/solution-qn-2.png"/>
 
 ---
@@ -99,7 +99,10 @@ Enter the recursion depth: 3<br>
 
 <img width="668" height="710" alt="image" src="https://github.com/user-attachments/assets/779755e7-afd6-43fd-aaab-9ae007c805d5" />
 
-
+Output Screenshot1: <br>
+<img width="668" height="710" alt="image" src="https://github.com/ekrajghimire/HIT137_2025_SS_SYDN35-Assignment02/blob/main/assests/Q3_Output1.png" /><br>
+Output Screenshot2: <br>
+<img width="668" height="710" alt="image" src="https://github.com/ekrajghimire/HIT137_2025_SS_SYDN35-Assignment02/blob/main/assests/Q3_Output2.png" />
 
 
 
