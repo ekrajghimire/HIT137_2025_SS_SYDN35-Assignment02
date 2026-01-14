@@ -59,6 +59,7 @@ Create a program that analyses temperature data collected from multiple weather 
     - "Most Stable: Station XYZ: StdDev 2.3°C"  
     - "Most Variable: Station DEF: StdDev 12.8°C"  
   - If multiple stations tie, list all of them
+<br/>
   Solution:
   <img src="./assests/solution-qn-2.png"/>
 
