@@ -50,4 +50,4 @@ def draw_edge(length, depth):
 
         # 4. Turn RIGHT 60 to straighten out
         turtle.right(60)
-        draw_edge(new_length, depth - 2)
+        draw_edge(new_length, depth - 1)
