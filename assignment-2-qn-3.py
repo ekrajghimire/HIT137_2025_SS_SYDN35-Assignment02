@@ -55,24 +55,30 @@ def draw_edge(length, depth):
 
 #### Main Program
 
- # User inputs for sides, length and depth
-sides = int(input("Enter the number of sides: "))
-length = float(input("Enter the side length: "))
-depth = int(input("Enter the recursion depth: "))
+try:
+   # User inputs for sides, length and depth
+  sides = int(input("Enter the number of sides: "))
+  length = float(input("Enter the side length: "))
+  depth = int(input("Enter the recursion depth: "))
+  
+  # Set drawing speed
+  turtle.speed(0)
+  turtle.delay(0)
+  
+  # Position the turtle to center the square
+  turtle.penup()
+  turtle.goto(-length/2, length/2)
+  turtle.pendown()
+  
+  # Compute the angle value
+  angle = 360 / sides
+  
+  # Draw recursively
+  for _ in range(sides):
+    draw_edge(length, depth)
+    turtle.right(angle)
+  
+  turtle.done()
 
-# Set drawing speed
-turtle.speed(0)
-turtle.delay(0)
-
-# Position the turtle to center the square
-turtle.penup()
-turtle.goto(-length/2, length/2)
-turtle.pendown()
-
-# Compute the angle value
-angle = 360 / sides
-
-# Draw recursively
-for _ in range(sides):
-  draw_edge(length, depth)
-  turtle.right(angle)
+except Exception as e:
+    print("Something went wrong. Please check for proper input values.",e)
