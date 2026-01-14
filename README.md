@@ -37,6 +37,9 @@ When run, your program should automatically:<br>
   3. Decrypt the encrypted file<br>
   4. Verify the decryption matches the original<br>
 
+  Solution:
+  <img src="./assests/solution-qn-1.png"/>
+
 ---
 ## Question 2
 Create a program that analyses temperature data collected from multiple weather stations in Australia. The data is stored in multiple CSV files under a "temperatures" folder, with each file representing data from one year. Process ALL .csv files in the temperatures folder. Ignore missing temperature values (NaN) in calculations.
@@ -56,6 +59,8 @@ Create a program that analyses temperature data collected from multiple weather 
     - "Most Stable: Station XYZ: StdDev 2.3°C"  
     - "Most Variable: Station DEF: StdDev 12.8°C"  
   - If multiple stations tie, list all of them
+  Solution:
+  <img src="./assests/solution-qn-2.png"/>
 
 ---
 
