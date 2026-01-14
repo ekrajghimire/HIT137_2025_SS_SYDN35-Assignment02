@@ -46,9 +46,9 @@ When run, your program should automatically:
 ###########################
 References:
 - https://docs.python.org/3/library/functions.html#ord
-- https://docs.python.org/3/library/functions.html#open
+-  https://www.geeksforgeeks.org/python/encrypt-and-decrypt-files-using-python/
 - https://docs.python.org/3/library/stdtypes.html#str.join
-- https://docs.python.org/3/tutorial/errors.html
+- https://en.wikipedia.org/wiki/Caesar_cipher
 """
 
 
