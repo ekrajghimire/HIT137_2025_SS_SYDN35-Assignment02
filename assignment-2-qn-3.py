@@ -63,3 +63,16 @@ depth = int(input("Enter the recursion depth: "))
 # Set drawing speed
 turtle.speed(0)
 turtle.delay(0)
+
+# Position the turtle to center the square
+turtle.penup()
+turtle.goto(-length/2, length/2)
+turtle.pendown()
+
+# Compute the angle value
+angle = 360 / sides
+
+# Draw recursively
+for _ in range(sides):
+  draw_edge(length, depth)
+  turtle.right(angle)
