@@ -51,3 +51,15 @@ def draw_edge(length, depth):
         # 4. Turn RIGHT 60 to straighten out
         turtle.right(60)
         draw_edge(new_length, depth - 1)
+
+
+#### Main Program
+
+ # User inputs for sides, length and depth
+sides = int(input("Enter the number of sides: "))
+length = float(input("Enter the side length: "))
+depth = int(input("Enter the recursion depth: "))
+
+# Set drawing speed
+turtle.speed(0)
+turtle.delay(0)
