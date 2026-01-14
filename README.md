@@ -1,6 +1,14 @@
 # HIT137_2025_SS_SYDN35-Assignment02
 Software Now - Assignment 2
 
+## Team Collaboration Rate in %
+| Name               | Student ID |  Collaboration Rate in %  |
+|--------------------|------------|---------------------------|
+| Ekraj Ghimire      | S398831    |                       25% |
+| Sudip Sunar        | S398629    |                       25% |
+| Roshan Lamichhane  | S399178    |                       25% |
+| Shrijan Neupane    | S398335    |                       25% |
+---
 ## Overview
 This repository contains the assignment task for HIT137 Group Assignment 02. <br>
 The assignment focuses on file handling, encryption/decryption, data analysis, recursion, and visualization using Python. <br>
