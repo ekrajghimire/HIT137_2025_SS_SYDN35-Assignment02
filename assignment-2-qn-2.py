@@ -109,5 +109,64 @@ def read_temperature_files():
 
     return all_data
 
+def get_total_years():
+    """get the total files within the temperatures directory"""
+    # list all files under the temperature directory
+    files = os.listdir(TEMPERATURE_DIR)
+    # get the length of list
+    total = len(files)
+
+    return total
+
+
+def is_valid_temperature(val):
+    """check if provided temperature  is valid."""
+    if val == "" or val.lower() == "nan":
+        return False
+    try:
+        float(val)
+        return True
+    except ValueError:
+        return False
+
+
+def compute_avg_season_temperature(all_data):
+    """compute average seasonal temperature data"""
+
+    # total temperature in each seasons
+    seasons = dict()
+    # total number of each seasons
+    seasons_count = dict()
+
+    # Add entry for each season
+    for s in AUS_SEASONS:
+        seasons[s] = 0
+        seasons_count[s] = 0
+
+    # process each entry in the data
+    # process each entry - each location -> each month (map to corressponding season)
+    for row in all_data:
+        # go through each months in a row
+        for month in YEAR_MONTHS:
+            # get the season based on month
+            season_value = MONTHS_TO_SEASON[month]
+
+            # get temperature of the current month
+            temperature = row[month]
+
+            # increment the count of season
+            seasons_count[season_value] += 1
+
+            # check if temperature is valid
+            if is_valid_temperature(temperature):
+                seasons[season_value] += float(temperature)
+
+    # now compute average for seasons
+    for s in AUS_SEASONS:
+        seasons[s] /= seasons_count[s]
+
+    return seasons
+
+
 
 ### Main Program
